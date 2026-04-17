@@ -12,6 +12,8 @@ steps:
         '--build-arg', 'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${_FIREBASE_BUCKET}',
         '--build-arg', 'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${_FIREBASE_SENDER}',
         '--build-arg', 'NEXT_PUBLIC_FIREBASE_APP_ID=${_FIREBASE_ID}',
+        '--build-arg', 'NEXT_PUBLIC_MAPS_API_KEY=${_MAPS_KEY}',
+        '--build-arg', 'NEXT_PUBLIC_GA_MEASUREMENT_ID=${_GA_ID}',
         '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse:latest',
         '.'
       ]

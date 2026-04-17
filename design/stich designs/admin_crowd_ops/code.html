@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arena Pulse - Admin Crowd Operations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface":"#131313","surface-container":"#201f1f","surface-container-low":"#1c1b1b","surface-container-high":"#2a2a2a","surface-container-highest":"#353534","on-surface":"#e5e2e1","on-surface-variant":"#c1c6d7","primary":"#00daf8","on-primary":"#00363f","secondary-container":"#ffbf00","on-secondary-container":"#6d5000","tertiary":"#edb1ff","tertiary-container":"#c070de","error":"#ffb4ab","error-container":"#93000a"},fontFamily:{"headline":["Space Grotesk"],"body":["Plus Jakarta Sans"]}}}}
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+  .glass{background:rgba(19,19,19,0.7);backdrop-filter:blur(20px);}
+  @keyframes crowd-pulse{0%,100%{opacity:0.6}50%{opacity:0.9}}
+  .busy-zone{animation:crowd-pulse 2s ease-in-out infinite;}
+  @keyframes staff-blink{0%,100%{opacity:1}50%{opacity:0.4}}
+  .staff-dot{animation:staff-blink 3s ease-in-out infinite;}
+  body{min-height:max(884px,100dvh);}
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body">
+
+<!-- Admin Header -->
+<header class="fixed top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-xl border-b border-white/5 h-16 flex items-center px-5 gap-3">
+  <button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
+    <span class="material-symbols-outlined text-sm">arrow_back</span>
+  </button>
+  <div class="flex-1">
+    <div class="flex items-center gap-2">
+      <h1 class="font-headline font-bold text-base">Crowd Operations Map</h1>
+      <div class="flex items-center gap-1 bg-red-900/30 border border-red-500/30 px-2 py-0.5 rounded-full">
+        <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+        <span class="text-xs font-bold text-red-400">LIVE</span>
+      </div>
+    </div>
+    <p class="text-xs text-on-surface-variant">Updated 5s ago · Wembley Stadium</p>
+  </div>
+  <button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+    <span class="material-symbols-outlined text-sm">download</span>
+  </button>
+</header>
+
+<main class="pt-16 pb-4">
+
+  <!-- Layer Controls -->
+  <div class="px-4 pt-3 pb-2 bg-[#131313]/80 sticky top-16 z-40 border-b border-white/5">
+    <div class="flex gap-2 overflow-x-auto no-scrollbar">
+      <button class="flex-shrink-0 bg-primary text-on-primary font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">sensors</span>Crowd
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-high text-on-surface-variant font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">person_pin</span>Staff
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-high text-on-surface-variant font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">videocam</span>CCTV
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-high text-on-surface-variant font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm text-red-400">warning</span>Incidents
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-high text-on-surface-variant font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-wider">
+        15min ago
+      </button>
+    </div>
+  </div>
+
+  <!-- Stadium Map -->
+  <div class="relative bg-[#0e0e0e] overflow-hidden" style="height:420px">
+    <svg viewBox="0 0 360 280" class="w-full h-full" style="overflow:visible">
+      <!-- Background -->
+      <rect width="360" height="280" fill="#0e0e0e"/>
+
+      <!-- OUTER STADIUM SHELL -->
+      <ellipse cx="180" cy="140" rx="160" ry="120" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+      <!-- CONCOURSE RING (outer) -->
+      <ellipse cx="180" cy="140" rx="145" ry="108" fill="#1c1b1b" stroke="#2a2a2a" stroke-width="1"/>
+
+      <!-- STANDS (sections A-H, colored by crowd density) -->
+      <!-- North stands - Section A (clear) -->
+      <path d="M100,50 Q180,20 260,50 Q180,60 100,50z" fill="rgba(0,255,157,0.35)" stroke="#00FF9D" stroke-width="0.5"/>
+      <!-- Section B (moderate) -->
+      <path d="M260,50 Q310,80 320,140 Q290,120 285,90z" fill="rgba(255,191,0,0.4)" stroke="#ffbf00" stroke-width="0.5" class="busy-zone"/>
+      <!-- Section C (busy) -->
+      <path d="M320,140 Q310,200 260,230 Q280,200 305,170z" fill="rgba(255,140,0,0.45)" stroke="#FF8C00" stroke-width="0.5" class="busy-zone"/>
+      <!-- Section D (peak - south east) -->
+      <path d="M260,230 Q180,260 100,230 Q150,220 200,225z" fill="rgba(255,77,106,0.5)" stroke="#ff4d6a" stroke-width="0.5" class="busy-zone" style="animation-delay:0.5s"/>
+      <!-- Section E (busy) -->
+      <path d="M100,230 Q50,200 40,140 Q70,160 75,190z" fill="rgba(255,140,0,0.4)" stroke="#FF8C00" stroke-width="0.5"/>
+      <!-- Section F (moderate) -->
+      <path d="M40,140 Q50,80 100,50 Q75,80 55,120z" fill="rgba(255,191,0,0.35)" stroke="#ffbf00" stroke-width="0.5"/>
+
+      <!-- INNER CONCOURSE -->
+      <ellipse cx="180" cy="140" rx="115" ry="88" fill="#131313" stroke="#1c1b1b" stroke-width="1.5"/>
+
+      <!-- PITCH -->
+      <rect x="105" y="80" width="150" height="120" rx="4" fill="#1a3a1a"/>
+      <rect x="110" y="85" width="140" height="110" rx="3" fill="#1e431e"/>
+      <!-- Pitch markings -->
+      <ellipse cx="180" cy="140" rx="30" ry="22" fill="none" stroke="#2a5a2a" stroke-width="1"/>
+      <line x1="180" y1="85" x2="180" y2="195" stroke="#2a5a2a" stroke-width="1"/>
+      <circle cx="180" cy="140" r="2" fill="#2a5a2a"/>
+
+      <!-- GATES (numbered) -->
+      <!-- Gate A - North -->
+      <rect x="168" y="22" width="24" height="16" rx="4" fill="#009fb5" stroke="#00daf8" stroke-width="1"/>
+      <text x="180" y="33" text-anchor="middle" fill="#e5e2e1" font-size="7" font-family="Space Grotesk" font-weight="bold">GA</text>
+      <!-- Gate B - NE -->
+      <rect x="300" y="75" width="20" height="14" rx="3" fill="#1c1b1b" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="310" y="85" text-anchor="middle" fill="#c1c6d7" font-size="7" font-family="Space Grotesk">GB</text>
+      <!-- Gate C - East (user's gate) -->
+      <rect x="326" y="132" width="24" height="16" rx="4" fill="#009fb5" stroke="#00daf8" stroke-width="1.5"/>
+      <text x="338" y="143" text-anchor="middle" fill="#e5e2e1" font-size="7" font-family="Space Grotesk" font-weight="bold">C4 ★</text>
+      <!-- Gate D - SE -->
+      <rect x="302" y="194" width="20" height="14" rx="3" fill="#1c1b1b" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="312" y="204" text-anchor="middle" fill="#c1c6d7" font-size="7" font-family="Space Grotesk">GD</text>
+      <!-- Gate E - South (recommended exit) -->
+      <rect x="168" y="244" width="24" height="16" rx="4" fill="#00431e" stroke="#00FF9D" stroke-width="1.5"/>
+      <text x="180" y="255" text-anchor="middle" fill="#00FF9D" font-size="7" font-family="Space Grotesk" font-weight="bold">E2★</text>
+      <!-- Gate F - SW -->
+      <rect x="38" y="194" width="20" height="14" rx="3" fill="#1c1b1b" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="48" y="204" text-anchor="middle" fill="#c1c6d7" font-size="7" font-family="Space Grotesk">GF</text>
+      <!-- Gate G - West -->
+      <rect x="13" y="132" width="22" height="16" rx="3" fill="#1c1b1b" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="24" y="143" text-anchor="middle" fill="#c1c6d7" font-size="7" font-family="Space Grotesk">GG</text>
+      <!-- Gate H - NW -->
+      <rect x="38" y="75" width="20" height="14" rx="3" fill="#1c1b1b" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="48" y="85" text-anchor="middle" fill="#c1c6d7" font-size="7" font-family="Space Grotesk">GH</text>
+
+      <!-- Gate throughput arrows -->
+      <polygon points="338,128 342,120 346,128" fill="#00daf8" opacity="0.8"/>
+      <polygon points="180,248 176,240 184,240" fill="#00FF9D" opacity="0.8"/>
+
+      <!-- STAFF positions (white dots with initials) -->
+      <circle cx="220" cy="65" r="6" fill="#353534" stroke="#e5e2e1" stroke-width="1.5" class="staff-dot"/>
+      <text x="220" y="68" text-anchor="middle" fill="#e5e2e1" font-size="5" font-family="sans-serif">JD</text>
+      <circle cx="145" cy="200" r="6" fill="#353534" stroke="#e5e2e1" stroke-width="1.5" class="staff-dot" style="animation-delay:1s"/>
+      <text x="145" y="203" text-anchor="middle" fill="#e5e2e1" font-size="5" font-family="sans-serif">MR</text>
+      <circle cx="290" cy="165" r="6" fill="#353534" stroke="#e5e2e1" stroke-width="1.5" class="staff-dot" style="animation-delay:0.5s"/>
+      <text x="290" y="168" text-anchor="middle" fill="#e5e2e1" font-size="5" font-family="sans-serif">PK</text>
+
+      <!-- INCIDENT marker -->
+      <polygon points="215,210 220,225 210,225" fill="#ff4d6a" opacity="0.9"/>
+      <text x="220" y="222" fill="#ff4d6a" font-size="8" font-family="sans-serif" font-weight="bold">!</text>
+      <circle cx="215" cy="218" r="12" fill="none" stroke="#ff4d6a" stroke-width="1" opacity="0.4">
+        <animate attributeName="r" values="10;18;10" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- CCTV cameras -->
+      <circle cx="180" cy="40" r="3" fill="#414754"/>
+      <circle cx="320" cy="100" r="3" fill="#414754"/>
+      <circle cx="320" cy="180" r="3" fill="#414754"/>
+      <circle cx="180" cy="240" r="3" fill="#414754"/>
+      <circle cx="40" cy="180" r="3" fill="#414754"/>
+      <circle cx="40" cy="100" r="3" fill="#414754"/>
+
+      <!-- Food stall markers on concourse -->
+      <circle cx="210" cy="52" r="4" fill="#ffbf00"/>
+      <circle cx="300" cy="110" r="4" fill="#ffbf00"/>
+      <circle cx="300" cy="170" r="4" fill="#ffbf00"/>
+      <circle cx="150" cy="52" r="4" fill="#ffbf00"/>
+      <circle cx="60" cy="110" r="4" fill="#ffbf00"/>
+      <circle cx="60" cy="170" r="4" fill="#ffbf00"/>
+
+      <!-- WC markers -->
+      <circle cx="180" cy="56" r="3.5" fill="#378ADD"/>
+      <circle cx="316" cy="140" r="3.5" fill="#378ADD"/>
+      <circle cx="180" cy="224" r="3.5" fill="#378ADD"/>
+      <circle cx="44" cy="140" r="3.5" fill="#378ADD"/>
+
+    </svg>
+
+    <!-- Map controls overlay -->
+    <div class="absolute top-3 right-3 flex flex-col gap-2">
+      <button class="w-8 h-8 rounded-lg glass border border-white/10 flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm">add</span>
+      </button>
+      <button class="w-8 h-8 rounded-lg glass border border-white/10 flex items-center justify-center">
+        <span class="material-symbols-outlined text-sm">remove</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- INCIDENT ALERT BANNER -->
+  <div class="mx-4 mt-3 bg-red-900/30 border border-red-500/40 rounded-xl p-3 flex items-center gap-3">
+    <span class="material-symbols-outlined text-red-400 text-xl" style="font-variation-settings:'FILL' 1">warning</span>
+    <div class="flex-1">
+      <p class="font-bold text-sm text-red-400">Incident: South Stand, Zone D</p>
+      <p class="text-xs text-on-surface-variant">Medical — Staff dispatched 14:47</p>
+    </div>
+    <button class="bg-red-900/50 text-red-400 text-xs font-bold px-3 py-1 rounded-lg border border-red-500/30">View</button>
+  </div>
+
+  <!-- Zone Data Panel -->
+  <div class="px-4 mt-3">
+    <h3 class="font-headline font-bold text-xs text-on-surface-variant uppercase tracking-widest mb-2">ZONE THROUGHPUT</h3>
+    <div class="space-y-2">
+      <!-- Zone rows -->
+      <div class="bg-surface-container-low rounded-xl p-3 flex items-center gap-3 border border-white/5">
+        <div class="w-3 h-3 rounded-full bg-[#ff4d6a] flex-shrink-0"></div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm text-on-surface">South Stand (D)</span>
+            <span class="text-xs font-black text-[#ff4d6a]">91%</span>
+          </div>
+          <div class="flex items-center justify-between mt-0.5">
+            <div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden mr-3">
+              <div class="h-full bg-[#ff4d6a] rounded-full" style="width:91%"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant">+1,240/min</span>
+          </div>
+        </div>
+        <button class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center">
+          <span class="material-symbols-outlined text-sm">more_vert</span>
+        </button>
+      </div>
+      <div class="bg-surface-container-low rounded-xl p-3 flex items-center gap-3 border border-white/5">
+        <div class="w-3 h-3 rounded-full bg-[#FF8C00] flex-shrink-0"></div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm text-on-surface">East Stand (B-C)</span>
+            <span class="text-xs font-black text-[#FF8C00]">78%</span>
+          </div>
+          <div class="flex items-center justify-between mt-0.5">
+            <div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden mr-3">
+              <div class="h-full bg-[#FF8C00] rounded-full" style="width:78%"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant">+890/min</span>
+          </div>
+        </div>
+        <button class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center">
+          <span class="material-symbols-outlined text-sm">more_vert</span>
+        </button>
+      </div>
+      <div class="bg-surface-container-low rounded-xl p-3 flex items-center gap-3 border border-white/5">
+        <div class="w-3 h-3 rounded-full bg-[#ffbf00] flex-shrink-0"></div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm text-on-surface">North Stand (A)</span>
+            <span class="text-xs font-black text-[#ffbf00]">52%</span>
+          </div>
+          <div class="flex items-center justify-between mt-0.5">
+            <div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden mr-3">
+              <div class="h-full bg-[#ffbf00] rounded-full" style="width:52%"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant">+340/min</span>
+          </div>
+        </div>
+        <button class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center">
+          <span class="material-symbols-outlined text-sm">more_vert</span>
+        </button>
+      </div>
+      <div class="bg-surface-container-low rounded-xl p-3 flex items-center gap-3 border border-white/5">
+        <div class="w-3 h-3 rounded-full bg-[#00FF9D] flex-shrink-0"></div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm text-on-surface">West Stand (E-F)</span>
+            <span class="text-xs font-black text-[#00FF9D]">28%</span>
+          </div>
+          <div class="flex items-center justify-between mt-0.5">
+            <div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden mr-3">
+              <div class="h-full bg-[#00FF9D] rounded-full" style="width:28%"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant">+120/min</span>
+          </div>
+        </div>
+        <button class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center">
+          <span class="material-symbols-outlined text-sm">more_vert</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Legend -->
+  <div class="px-4 mt-4 pb-4">
+    <div class="bg-surface-container-low rounded-xl p-3 border border-white/5">
+      <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">LEGEND</p>
+      <div class="grid grid-cols-3 gap-2">
+        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-[#ff4d6a]"></div><span class="text-xs text-on-surface-variant">Peak >81%</span></div>
+        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-[#FF8C00]"></div><span class="text-xs text-on-surface-variant">Busy 61%</span></div>
+        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-[#ffbf00]"></div><span class="text-xs text-on-surface-variant">Mod 36%</span></div>
+        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-[#00FF9D]"></div><span class="text-xs text-on-surface-variant">Clear</span></div>
+        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-[#e5e2e1] border-2 border-[#353534]"></div><span class="text-xs text-on-surface-variant">Staff</span></div>
+        <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 bg-[#ff4d6a]" style="clip-path:polygon(50% 0,100% 100%,0 100%)"></div><span class="text-xs text-on-surface-variant">Incident</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body></html>

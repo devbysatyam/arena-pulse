@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-bg-surface-container-low {
+            background-color: #1c1b1b;
+        }
+        .tonal-depth-layering {
+            background: linear-gradient(to top, #131313 0%, rgba(19, 19, 19, 0.8) 100%);
+        }
+        .glass-card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#402d00",
+                        "surface-variant": "#353534",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#320046",
+                        "surface": "#131313",
+                        "on-secondary-fixed": "#261a00",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "outline-variant": "#414754",
+                        "on-secondary-container": "#6d5000",
+                        "tertiary-container": "#c070de",
+                        "inverse-primary": "#006877",
+                        "background": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-tint": "#00daf8",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-tertiary": "#520070",
+                        "tertiary": "#edb1ff",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-on-surface": "#313030",
+                        "on-primary": "#00363f",
+                        "outline": "#8b90a0",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-container": "#480063",
+                        "on-primary-container": "#002f37",
+                        "on-primary-fixed": "#001f25",
+                        "secondary": "#ffe2ab",
+                        "surface-dim": "#131313",
+                        "on-surface-variant": "#c1c6d7",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-container": "#009fb5",
+                        "secondary-container": "#ffbf00",
+                        "error": "#ffb4ab",
+                        "primary": "#00daf8",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#6e208c",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#00daf8",
+                        "secondary-fixed": "#ffdfa0",
+                        "surface-bright": "#393939",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#a5eeff",
+                        "surface-container-highest": "#353534",
+                        "tertiary-fixed": "#f9d8ff",
+                        "tertiary-fixed-dim": "#edb1ff",
+                        "on-primary-fixed-variant": "#004e5a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-[0_32px_32px_-4px_rgba(0,0,0,0.15)] h-20 flex justify-between items-center px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00daf8] text-2xl" data-icon="sports_soccer">sports_soccer</span>
+<h1 class="font-headline font-bold tracking-tight text-[#00daf8]">LIV 2 - 1 CHE | 84'</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 hover:border-primary transition-colors cursor-pointer">
+<img alt="User Avatar" class="w-full h-auto" data-alt="professional portrait of a sports fan in a modern digital environment with blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZQjlnkUXxdu3WL9WlM5_C0swBj0eCmgoWdWqOvTY6KQQrNqZmlDvAKAcZIyiXOkGoQrOb_wvEVMEcNKKJNujaUkbLPio4d4QqmGrf3vc_DdyHB717pUI4B_jCxovqyHk_9xyTZHWll31cmFFJlclt1QXCOlh68QYCVp-Fo8Pb8I2u-1VJ0D7rCpX-DqFtmrdpRq10F-VLt41aC7DZh2EkjknWWvSbnjf1df63KrKtKe9OZuNbSqBCvjeZe4qE5ayI7I9-Exi_hZYx"/>
+</div>
+</div>
+</header>
+<main class="pt-28 px-6 max-w-md mx-auto space-y-8">
+<!-- Event Header Card -->
+<section class="relative overflow-hidden rounded-[2rem] bg-surface-container-low p-6">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Digital Entry</span>
+</div>
+<h2 class="font-headline text-3xl font-black text-on-surface leading-none mb-1">Arena Pulse</h2>
+<p class="text-on-surface-variant text-sm font-medium">Premier League • Stadium West</p>
+<div class="mt-6 flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Date</span>
+<span class="font-headline font-bold text-lg">Oct 24, 2024</span>
+</div>
+<div class="flex flex-col items-end text-right">
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Kick-off</span>
+<span class="font-headline font-bold text-lg">20:00 BST</span>
+</div>
+</div>
+</section>
+<!-- Dynamic QR Code Section -->
+<section class="bg-surface-container-high rounded-[2.5rem] p-8 flex flex-col items-center gap-6 relative shadow-2xl">
+<!-- Ticket Notch Effect -->
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-surface"></div>
+<div class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-surface"></div>
+<div class="bg-white p-4 rounded-3xl shadow-[0_0_40px_rgba(0,218,248,0.2)]">
+<!-- Visual placeholder for a complex QR code -->
+<div class="w-48 h-48 bg-white flex items-center justify-center relative">
+<div class="grid grid-cols-6 grid-rows-6 gap-1 w-full h-full p-2 opacity-90">
+<div class="bg-black rounded-sm col-span-2 row-span-2"></div>
+<div class="bg-black rounded-sm col-start-5 col-span-2 row-span-2"></div>
+<div class="bg-black rounded-sm row-start-5 col-span-2 row-span-2"></div>
+<div class="bg-black/20 rounded-sm col-start-3 row-start-3 col-span-2 row-span-2"></div>
+<div class="bg-black rounded-sm col-start-3 row-start-1"></div>
+<div class="bg-black rounded-sm col-start-4 row-start-2"></div>
+<div class="bg-black rounded-sm col-start-1 row-start-3"></div>
+<div class="bg-black rounded-sm col-start-6 row-start-4"></div>
+<div class="bg-primary rounded-full w-4 h-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-4 border-white"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="font-headline font-bold tracking-tight">Expires in 45s</span>
+</div>
+<p class="text-on-surface-variant text-xs font-medium">Dynamic code refreshes for security</p>
+</div>
+</section>
+<!-- Seat Info Bento Grid -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant mb-1">Section</span>
+<span class="font-headline font-black text-2xl text-primary">102</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant mb-1">Row</span>
+<span class="font-headline font-black text-2xl text-primary">G</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant mb-1">Seat</span>
+<span class="font-headline font-black text-2xl text-primary">14</span>
+</div>
+</div>
+<!-- Gate & Wait Time Module -->
+<section class="bg-surface-container-highest rounded-3xl p-6 flex items-center justify-between border-l-4 border-secondary-container">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center">
+<span class="font-headline font-black text-on-secondary-container text-xl">3</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Assigned Gate</h3>
+<p class="text-on-surface-variant text-sm">North Entrance Plaza</p>
+</div>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-sm">person_search</span>
+<span class="font-headline font-bold">Est. Wait: 4 mins</span>
+</div>
+<p class="text-[10px] uppercase font-black text-on-surface-variant mt-1">Live Queue Update</p>
+</div>
+</section>
+<!-- Actions -->
+<div class="space-y-4 pt-4">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary h-16 rounded-full font-headline font-black uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">send</span>
+                Transfer Ticket
+            </button>
+<button class="w-full bg-surface-container-high hover:bg-surface-bright text-on-surface h-14 rounded-full font-headline font-bold flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">receipt_long</span>
+                View Order Details
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full bg-[#131313]/90 backdrop-blur-2xl flex justify-around items-center px-4 pt-3 pb-8 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] rounded-t-[2rem]">
+<button class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 hover:text-[#00daf8] transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 hover:text-[#00daf8] transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="map">map</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 hover:text-[#00daf8] transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="fastfood">fastfood</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Food</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#00daf8]/10 text-[#00daf8] rounded-full px-6 py-2 active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Ticket</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 hover:text-[#00daf8] transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="more_horiz">more_horiz</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">More</span>
+</button>
+</nav>
+</body></html>

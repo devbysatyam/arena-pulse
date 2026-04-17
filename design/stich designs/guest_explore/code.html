@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arena Pulse - Explore</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface": "#131313",
+          "surface-container": "#201f1f",
+          "surface-container-low": "#1c1b1b",
+          "surface-container-high": "#2a2a2a",
+          "surface-container-highest": "#353534",
+          "on-surface": "#e5e2e1",
+          "on-surface-variant": "#c1c6d7",
+          "primary": "#00daf8",
+          "on-primary": "#00363f",
+          "primary-container": "#009fb5",
+          "secondary-container": "#ffbf00",
+          "on-secondary-container": "#6d5000",
+          "tertiary": "#edb1ff",
+          "tertiary-container": "#c070de",
+          "outline-variant": "#414754",
+          "background": "#131313",
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Plus Jakarta Sans"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass { background: rgba(19,19,19,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  .stadium-glow { box-shadow: 0 0 80px rgba(0,218,248,0.15), 0 0 160px rgba(192,112,222,0.1); }
+  .cyan-glow { box-shadow: 0 0 20px rgba(0,218,248,0.5); }
+  .violet-glow { box-shadow: 0 0 20px rgba(192,112,222,0.5); }
+  @keyframes pulse-ring { 0%,100%{transform:scale(1);opacity:0.8} 50%{transform:scale(1.05);opacity:1} }
+  @keyframes float { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-8px)} }
+  .float-anim { animation: float 4s ease-in-out infinite; }
+  body { min-height: max(884px, 100dvh); }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-x-hidden">
+
+<!-- Top Bar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#131313]/80 backdrop-blur-xl border-b border-white/5">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">stadium</span>
+    <span class="font-headline font-black text-lg text-primary tracking-tight">ARENA PULSE</span>
+  </div>
+  <div class="w-9 h-9 rounded-full bg-surface-container-highest border border-primary/20 overflow-hidden">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfdxjgyIWdSaqPPKFFHvzRlHTuDbtfPwdoCUomaCFwcPGmu-GuBoiikhcQ8Fhi0pOk4-hQpb1_VFkrobyI85dyzmfIKXaTpfj-IxGOT7iYri5UCxoJYKYMdsrncGBJfH3SYf829tgTWFEvBJMV8_ijwkqxbBozvqBE5L83SRt6easZXgAQ1YXTjFo7ZUMnJMXQ37exhY6UFr62gUTka69qcbDdfOow1H5ytuGHvI30gntXNKSEr27qpb6D5eiCwEgbezdIioQCQQS9" alt="User" class="w-full h-full object-cover"/>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="pt-16 pb-28 px-5">
+
+  <!-- Venue Title -->
+  <div class="text-center pt-8 pb-4">
+    <h1 class="font-headline font-black text-3xl text-on-surface tracking-tight">WEMBLEY STADIUM</h1>
+    <p class="text-on-surface-variant text-sm mt-1">April 16 · Chelsea vs Arsenal · 15:00</p>
+  </div>
+
+  <!-- 3D Stadium Hero Card -->
+  <div class="relative mx-auto stadium-glow float-anim rounded-3xl overflow-hidden mb-6" style="height:240px">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV-kp7R9F89vlqez72655cFFzMtKheVxiRJ4gZAekIQN9m-8oP3SPivxqthFSROCd6FEFTiOK55zbZk7yYXFKh0-GXVvxMjkBATdJ9ZwtCcCXlEp1uZZJEaLHrMPkcGPBG4gqdXyn7mLzYDlvbBbQN1NSq_DhI1jQw6nnARqrYvnR8GfivB-JpM7mA8EneHrQTrISn4bNEdhpH5fl4_hsx0QXzjDZoCy_jM_rS7565FEEayzdcSD0gGXb6OSwO7RkwheQc6YCB1FdN" alt="Wembley 3D" class="w-full h-full object-cover opacity-80"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent"></div>
+    <!-- Live chip -->
+    <div class="absolute top-4 left-4 flex items-center gap-2 glass px-3 py-1.5 rounded-full border border-white/10">
+      <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+      <span class="text-xs font-bold text-on-surface uppercase tracking-wider">LIVE NOW</span>
+    </div>
+    <!-- Attendance chip -->
+    <div class="absolute top-4 right-4 glass px-3 py-1.5 rounded-full border border-primary/20">
+      <span class="text-xs font-bold text-primary">58,240 Fans</span>
+    </div>
+  </div>
+
+  <!-- CTA Buttons -->
+  <div class="flex gap-3 mb-8">
+    <button onclick="document.querySelectorAll('.guest-view').forEach(el=>el.classList.remove('hidden'))" class="flex-1 h-14 rounded-2xl border-2 border-primary text-primary font-headline font-bold text-sm flex items-center justify-center gap-2 glass hover:bg-primary/10 transition-all">
+      <span class="material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1">explore</span>
+      EXPLORE AS GUEST
+    </button>
+    <button class="flex-1 h-14 rounded-2xl bg-primary text-on-primary font-headline font-bold text-sm flex items-center justify-center gap-2 cyan-glow hover:opacity-90 transition-all">
+      <span class="material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1">login</span>
+      SIGN IN
+    </button>
+  </div>
+
+  <!-- Locked Features -->
+  <div class="mb-4">
+    <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">LOCKED FEATURES</p>
+    <div class="grid grid-cols-2 gap-3">
+      <!-- Stadium Map - unlocked for guest -->
+      <div class="bg-surface-container-low rounded-2xl p-4 border border-white/5">
+        <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">map</span>
+        </div>
+        <p class="font-headline font-bold text-sm text-on-surface">STADIUM MAP</p>
+        <p class="text-xs text-on-surface-variant mt-1">View concourse & sections</p>
+        <div class="mt-2 flex items-center gap-1">
+          <div class="w-2 h-2 rounded-full bg-green-400"></div>
+          <span class="text-xs text-green-400 font-bold">Available</span>
+        </div>
+      </div>
+      <!-- Food - locked -->
+      <div class="bg-surface-container-low rounded-2xl p-4 border border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-surface/60 backdrop-blur-[2px] flex items-center justify-center z-10 rounded-2xl">
+          <span class="material-symbols-outlined text-on-surface-variant text-3xl">lock</span>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings:'FILL' 1">fastfood</span>
+        </div>
+        <p class="font-headline font-bold text-sm text-on-surface">FOOD &amp; STALLS</p>
+        <p class="text-xs text-on-surface-variant mt-1">Order from your seat</p>
+      </div>
+      <!-- Ticket - locked -->
+      <div class="bg-surface-container-low rounded-2xl p-4 border border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-surface/60 backdrop-blur-[2px] flex items-center justify-center z-10 rounded-2xl">
+          <span class="material-symbols-outlined text-on-surface-variant text-3xl">lock</span>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-tertiary" style="font-variation-settings:'FILL' 1">confirmation_number</span>
+        </div>
+        <p class="font-headline font-bold text-sm text-on-surface">MY TICKET</p>
+        <p class="text-xs text-on-surface-variant mt-1">Digital pass &amp; QR code</p>
+      </div>
+      <!-- Crowd Heatmap - unlocked -->
+      <div class="bg-surface-container-low rounded-2xl p-4 border border-white/5">
+        <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">sensors</span>
+        </div>
+        <p class="font-headline font-bold text-sm text-on-surface">CROWD MAP</p>
+        <p class="text-xs text-on-surface-variant mt-1">Live density heatmap</p>
+        <div class="mt-2 flex items-center gap-1">
+          <div class="w-2 h-2 rounded-full bg-green-400"></div>
+          <span class="text-xs text-green-400 font-bold">Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guest info note -->
+  <p class="text-center text-on-surface-variant text-xs leading-relaxed mt-4 px-4">
+    GUEST MODE PERMITS LIMITED STADIUM NAVIGATION. REAL-TIME STATS AND MOBILE ORDERING REQUIRE A VERIFIED PROFILE.
+  </p>
+
+</main>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-7 bg-[#131313]/90 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-white/5">
+  <a href="#" class="flex flex-col items-center text-primary/40 py-1 px-3">
+    <span class="material-symbols-outlined text-xl mb-1">sensors</span>
+    <span class="text-[10px] font-bold uppercase tracking-wider">LIVE</span>
+  </a>
+  <a href="#" class="flex flex-col items-center text-primary/40 py-1 px-3">
+    <span class="material-symbols-outlined text-xl mb-1">storefront</span>
+    <span class="text-[10px] font-bold uppercase tracking-wider">STALLS</span>
+  </a>
+  <a href="#" class="flex flex-col items-center bg-primary/10 text-primary rounded-full py-1 px-4">
+    <span class="material-symbols-outlined text-xl mb-1" style="font-variation-settings:'FILL' 1">map</span>
+    <span class="text-[10px] font-bold uppercase tracking-wider">MAP</span>
+  </a>
+  <a href="#" class="flex flex-col items-center text-primary/40 py-1 px-3">
+    <span class="material-symbols-outlined text-xl mb-1">diamond</span>
+    <span class="text-[10px] font-bold uppercase tracking-wider">VIP</span>
+  </a>
+  <a href="#" class="flex flex-col items-center text-primary/40 py-1 px-3">
+    <span class="material-symbols-outlined text-xl mb-1">bar_chart</span>
+    <span class="text-[10px] font-bold uppercase tracking-wider">STATS</span>
+  </a>
+</nav>
+
+</body></html>

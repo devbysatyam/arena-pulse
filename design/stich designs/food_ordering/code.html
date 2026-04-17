@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-secondary": "#402d00",
+                "surface-variant": "#353534",
+                "on-error-container": "#ffdad6",
+                "on-tertiary-fixed": "#320046",
+                "surface": "#131313",
+                "on-secondary-fixed": "#261a00",
+                "secondary-fixed-dim": "#fbbc00",
+                "outline-variant": "#414754",
+                "on-secondary-container": "#6d5000",
+                "tertiary-container": "#c070de",
+                "inverse-primary": "#006877",
+                "background": "#131313",
+                "surface-container": "#201f1f",
+                "surface-tint": "#006877",
+                "on-secondary-fixed-variant": "#5c4300",
+                "on-tertiary": "#520070",
+                "tertiary": "#edb1ff",
+                "on-surface": "#e5e2e1",
+                "surface-container-lowest": "#0e0e0e",
+                "surface-container-high": "#2a2a2a",
+                "inverse-on-surface": "#313030",
+                "on-primary": "#00363f",
+                "outline": "#8b90a0",
+                "on-background": "#e5e2e1",
+                "on-tertiary-container": "#480063",
+                "on-primary-container": "#002f37",
+                "on-primary-fixed": "#001f25",
+                "secondary": "#ffe2ab",
+                "surface-dim": "#131313",
+                "on-surface-variant": "#c1c6d7",
+                "inverse-surface": "#e5e2e1",
+                "primary-container": "#009fb5",
+                "secondary-container": "#ffbf00",
+                "error": "#ffb4ab",
+                "primary": "#00daf8",
+                "error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#6e208c",
+                "on-error": "#690005",
+                "primary-fixed-dim": "#00daf8",
+                "secondary-fixed": "#ffdfa0",
+                "surface-bright": "#393939",
+                "surface-container-low": "#1c1b1b",
+                "primary-fixed": "#a5eeff",
+                "surface-container-highest": "#353534",
+                "tertiary-fixed": "#f9d8ff",
+                "tertiary-fixed-dim": "#edb1ff",
+                "on-primary-fixed-variant": "#004e5a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .amber-glow {
+            box-shadow: 0 0 20px rgba(255, 191, 0, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#131313]/80 backdrop-blur-xl shadow-[0_32px_32px_-4px_rgba(0,0,0,0.15)] h-20 flex justify-between items-center px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00daf8]" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<h1 class="text-xl font-black text-[#00daf8] font-['Space_Grotesk'] tracking-tight">LIV 2 - 1 CHE | 84'</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border-2 border-[#00daf8]/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish man with short beard and friendly expression in studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfdxjgyIWdSaqPPKFFHvzRlHTuDbtfPwdoCUomaCFwcPGmu-GuBoiikhcQ8Fhi0pOk4-hQpb1_VFkrobyI85dyzmfIKXaTpfj-IxGOT7iYri5UCxoJYKYMdsrncGBJfH3SYf829tgTWFEvBJMV8_ijwkqxbBozvqBE5L83SRt6easZXgAQ1YXTjFo7ZUMnJMXQ37exhY6UFr62gUTka69qcbDdfOow1H5ytuGHvI30gntXNKSEr27qpb6D5eiCwEgbezdIioQCQQS9"/>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Halftime Rush Warning -->
+<div class="mb-8 flex items-center justify-between p-4 bg-secondary-container/10 border border-secondary-container/20 rounded-2xl amber-glow">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div>
+<p class="text-secondary-container font-bold text-sm uppercase tracking-wider">Halftime Rush</p>
+<p class="text-on-surface/70 text-xs">High demand expected in 6 mins. Order now!</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface/40">chevron_right</span>
+</div>
+<!-- Featured Nearest Stall -->
+<section class="mb-10">
+<div class="flex justify-between items-end mb-4">
+<h2 class="font-headline font-bold text-2xl tracking-tight">Nearest Stall</h2>
+<span class="text-primary font-bold text-sm tracking-tighter">VIEW ALL</span>
+</div>
+<div class="relative group overflow-hidden rounded-[2rem] bg-surface-container-low">
+<div class="h-48 w-full relative">
+<img alt="Premier Burger" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="gourmet juicy burger with melted cheese and fresh greens on a dark moody background with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu8Q402QMJMeeW-7JFmou8qYCnuB3iaFmTl7cZ5FrkIxGMAiZq3t40ievQyh5YOpouDaAWMgazAU5fW7TCxbIEm123tclRHCa_CIuuD95qhAJgGktqZZtOOhyJWc6OVMC1W8_nlKfr5eYUzlO8mkhbGdOylVYi-7rI0SM_1TmYoR4IxwhPY9KTV52_no6Z-CqI89o85huyzvP7Lr_PI97UEycDokgolwfRGqbzXnJHH6u7fYZ2mIN8P3Q_FlhSiaDP52WJcq8gfphR"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 glass-card px-3 py-1 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="text-xs font-bold text-on-surface uppercase tracking-widest">Ready in 4 min</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-2xl font-bold">Premier Burger</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">near_me</span>
+<p class="text-on-surface/60 text-sm">SEC 104 • 20m away</p>
+</div>
+</div>
+<div class="bg-primary/10 text-primary px-3 py-1 rounded-lg font-black text-sm">
+                            4.9 ★
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Menu Categories -->
+<section class="mb-10">
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+<button class="flex-shrink-0 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-bold text-sm uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-secondary-container/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">lunch_dining</span>
+                    Burgers
+                </button>
+<button class="flex-shrink-0 bg-surface-container-high text-on-surface/60 px-6 py-3 rounded-full font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">local_bar</span>
+                    Drinks
+                </button>
+<button class="flex-shrink-0 bg-surface-container-high text-on-surface/60 px-6 py-3 rounded-full font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">icecream</span>
+                    Snacks
+                </button>
+<button class="flex-shrink-0 bg-surface-container-high text-on-surface/60 px-6 py-3 rounded-full font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">restaurant_menu</span>
+                    Combos
+                </button>
+</div>
+</section>
+<!-- Quick Browse Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Item 1 -->
+<div class="bg-surface-container-low rounded-3xl p-4 flex flex-col gap-3 group">
+<div class="h-32 rounded-2xl overflow-hidden bg-surface-container-highest relative">
+<img alt="Classic Cheeseburger" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="classic double cheeseburger with sesame bun and crisp lettuce on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkHtxR0Ons_ZH3arxx1rv-DTzsEHX-ZS9IGUiTTn8704OzN-k5RwmDBy2dgUVx_xo3Rr13aqiuGgn-eoRDtjRWFGzJ4TsnOyZlsMg7cSWDAe9WX7E6zC1geY6LYPD5_S412foLW_pxRAV6tBDdxrgxwlc8CKkhlvIFIG2g0hmqD3NPFInWKTuTq5TQ3sxx3y77PEtH6y9fcYtaM_hNxx8LnwSPd2Dofsc_m7UUbl9RZ5dExtQ-F8bf3xUpOUVARwkHaDlcFHqR6RZp"/>
+<button class="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Classic Cheeseburger</h4>
+<p class="text-secondary-container font-black mt-1">$12.50</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-low rounded-3xl p-4 flex flex-col gap-3 group">
+<div class="h-32 rounded-2xl overflow-hidden bg-surface-container-highest relative">
+<img alt="Loaded Stadium Fries" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="crispy golden french fries topped with melted cheese sauce and jalapenos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANyEtFgDsqIw6k7Nx7RP_Aa-rgjSJkj7Y9ivCYkGuMA2p4UI5h-jM5EjSX5dvqAl3MFgJ8EWpCn7mmO2Uil3tluhAYWtLmsZLCG8awuz8cxfh-IcahOnNjc9vSyNJmZrelVv3CeZqgYZgw0K1oSM94_kHfUGRK7ej0nZdO5-kPKq1FnIObCnTco9EI_l8fwU9ieaZtC7pdXHuGx2SOmrX3YbrsHbieo4nUj7P2hcaqtaDV-Qncegp4yIWGB78y4SmDpYpppjLlyjKT"/>
+<button class="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Stadium Fries</h4>
+<p class="text-secondary-container font-black mt-1">$8.00</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-low rounded-3xl p-4 flex flex-col gap-3 group">
+<div class="h-32 rounded-2xl overflow-hidden bg-surface-container-highest relative">
+<img alt="Jumbo Hotdog" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="classic stadium hotdog with mustard and onions in a soft bun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCReVKyIncFVU0htmeqybL2Pryk_D2KYmPMM1FxdaXSZ0NFOZdBq4vuMUADqe70TLSqK1X87JcyWB1mz99LRE3H_cDq_j30Px7VMWzZlJT1tbDeD4laR4fmkRrKKI67PZc3yjqph1vGHlZQkUv4YfKNqxr2uSuMTgUv9jsXM4QfNlYUZEvct2xdHVkeS5wiwEC4i2gzIC7yTGDYQZBv3bOZgx7rL_jPfjiaG_gdaHE2laGadvpVZqTkaFBwY_ptOT5hytBp-ZAiSlgh"/>
+<button class="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Jumbo Arena Dog</h4>
+<p class="text-secondary-container font-black mt-1">$9.50</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-low rounded-3xl p-4 flex flex-col gap-3 group">
+<div class="h-32 rounded-2xl overflow-hidden bg-surface-container-highest relative">
+<img alt="Arena Soda" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="cold refreshing soda cup with ice and straw against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3blAsTvE1f-2d8Ni303vKTF71Ccolm3-zz-OO4PirHM7rnkWdXRxL5YonabP5hYFOrtxMFhL6uiLV7hHYxwIgo6NK_kN-YmrMUXYNMEdf8_UCShRaHTXK4ONsqCiAfOXqHXz6HYSwtFkvBIr3FSBj_tMn6BTffanNzW2HfVzPcYOtOk0j0OO-Eq8y85GGoNAksaZH-4ZVXvUHSX1PWk5sMDGGlNzdqQK3oRM_wnqRKGe3pj0MWHYm4zDbHpZmKdREX0x3tNu8ZK-Z"/>
+<button class="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Large Arena Soda</h4>
+<p class="text-secondary-container font-black mt-1">$6.50</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-8 bg-[#131313]/90 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 active:scale-90 duration-200 transition-all hover:text-[#00daf8]">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 active:scale-90 duration-200 transition-all hover:text-[#00daf8]">
+<span class="material-symbols-outlined mb-1">map</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Map</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#00daf8]/10 text-[#00daf8] rounded-full px-6 py-2 active:scale-90 duration-200 transition-all">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">fastfood</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Food</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 active:scale-90 duration-200 transition-all hover:text-[#00daf8]">
+<span class="material-symbols-outlined mb-1">confirmation_number</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">Ticket</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#e5e2e1]/60 px-6 py-2 active:scale-90 duration-200 transition-all hover:text-[#00daf8]">
+<span class="material-symbols-outlined mb-1">more_horiz</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider">More</span>
+</div>
+</nav>
+<!-- Floating Checkout Button (FAB) -->
+<div class="fixed bottom-32 right-6 z-40">
+<button class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary shadow-2xl flex items-center justify-center amber-glow active:scale-95 transition-transform">
+<div class="relative">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="absolute -top-2 -right-2 bg-on-secondary text-secondary-container text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-secondary-container">2</span>
+</div>
+</button>
+</div>
+</body></html>

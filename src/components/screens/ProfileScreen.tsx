@@ -101,7 +101,7 @@ export default function ProfileScreen() {
                 ${user.isGuest ? 'bg-white/10 text-white/40' : 'bg-[#7c5ff0]/20 text-[#a78bfa] border border-[#7c5ff0]/30'}`}>
                 {user.isGuest ? 'Guest' : 'Fan Member'}
               </span>
-              {user.hasTicker && (
+              {user.hasTicket && (
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#00d4ff]/15 text-[#00d4ff] border border-[#00d4ff]/25">
                   🎟 Ticket
                 </span>

@@ -22,12 +22,12 @@ export default function AuthScreen() {
         name: form.name || form.email.split('@')[0] || 'Fan',
         email: form.email,
         isGuest: false,
-        hasTicker: true,
+        hasTicket: true,
         avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${form.email}`,
       };
       loginUser(user);
-    } catch (e: any) {
-      setError(e.message || 'Login failed');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -49,13 +49,14 @@ export default function AuthScreen() {
         name: user.displayName || 'Fan',
         email: user.email || '',
         isGuest: false,
-        hasTicker: true,
+        hasTicket: true,
         avatar: user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.uid}`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error('SSO Error:', e);
-      setError(e.code === 'auth/configuration-not-found' 
-        ? 'Firebase not configured. Please add your keys to .env' 
+      const code = (e as { code?: string }).code;
+      setError(code === 'auth/configuration-not-found'
+        ? 'Firebase not configured. Please add your keys to .env'
         : 'Sign in failed. Try again.');
     } finally {
       setLoading(false);

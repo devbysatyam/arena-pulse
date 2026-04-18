@@ -20,13 +20,15 @@
 /** Google Analytics 4 Measurement ID */
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
 
+type GtagArgs = [string, string, Record<string, unknown>] | [string, Date];
+
 /**
  * Safely call the global gtag function.
  * No-op if gtag is not available (SSR, blocked by adblocker, etc.)
  */
-function gtag(...args: any[]): void {
-  if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
-    (window as any).gtag(...args);
+function gtag(...args: GtagArgs): void {
+  if (typeof window !== 'undefined' && typeof (window as unknown as { gtag?: unknown }).gtag === 'function') {
+    (window as unknown as { gtag: (...a: GtagArgs) => void }).gtag(...args);
   }
 }
 

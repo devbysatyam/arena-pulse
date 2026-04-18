@@ -182,10 +182,41 @@ body {
   margin: 8px auto 0;
 }
 
-/* Focus styles for accessibility - Interactive Clarity Booster */
+/* Focus styles — WCAG 2.1 Success Criterion 2.4.7 (Focus Visible) */
 :focus-visible {
   outline: 3px solid var(--color-cyan);
   outline-offset: 3px;
   box-shadow: 0 0 0 6px var(--color-bg), 0 0 0 9px var(--color-cyan);
   transition: outline-offset 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Remove focus ring for mouse/touch — only show for keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Respect OS-level preference for reduced motion — WCAG 2.3 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep animate-pulse for live indicators but reduce intensity */
+  .animate-pulse {
+    animation: none !important;
+    opacity: 0.85;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid ButtonText;
+  }
 }

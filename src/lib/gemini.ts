@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // ── API Key Pool ─────────────────────────────────────────────────────────────
 // Primary key + 2 backups. On rate-limit (429) the next key is tried automatically.
@@ -114,8 +114,9 @@ export async function askGemini(
   try {
     const text = await fetchWithKeyRotation(requestBody);
     return text || generateFallbackResponse(userMessage);
-  } catch (e: any) {
-    console.error('Gemini error (all keys failed):', e.message);
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : String(e);
+    console.error('Gemini error (all keys failed):', message);
     return generateFallbackResponse(userMessage);
   }
 }

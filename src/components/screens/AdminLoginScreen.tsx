@@ -92,7 +92,7 @@ export default function AdminLoginScreen() {
       setAdminUser({ uid: user.uid, email: user.email ?? email });
       trackAdminLogin(true);
       navigate('admin');
-    } catch (err: any) {
+    } catch (err: unknown) {
       const newAttempts = attempts + 1;
       setAttempts(newAttempts);
 

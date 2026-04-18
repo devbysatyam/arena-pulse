@@ -1,6 +1,6 @@
 'use client';
 import { create } from 'zustand';
-import { routeBetween } from '@/lib/pathfinding';
+import { routeBetween, type PathResult } from '@/lib/pathfinding';
 
 export type Screen =
   | 'splash'  | 'welcome'  | 'auth'
@@ -35,7 +35,7 @@ export interface User {
   email?: string;
   avatar?: string;
   isGuest: boolean;
-  hasTicker: boolean;
+  hasTicket: boolean;
 }
 
 export interface AppState {
@@ -72,7 +72,7 @@ export interface AppState {
   // Navigation state
   navFrom: string;
   navTo: string;
-  navRoute: any | null;
+  navRoute: PathResult | null;
   setNavRoute: (from: string, to: string) => void;
   isNavigating: boolean;
   setNavigating: (v: boolean) => void;
@@ -142,7 +142,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   user: null,
   isLoggedIn: false,
   loginAsGuest: () => set({
-    user: { uid:'guest', name:'Guest Fan', isGuest:true, hasTicker:false },
+    user: { uid:'guest', name:'Guest Fan', isGuest:true, hasTicket:false },
     isLoggedIn: true,
     showNav: true,
     screen: 'home',
@@ -187,7 +187,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   activeOrder: null,
   setActiveOrder: (o) => set({ activeOrder: o }),
 
-  // ── Navigation ────────────────────────────────────────
+  // ── Pathfinding ───────────────────────────────────────
   navFrom: 'GC',
   navTo:   'SA2',
   navRoute: routeBetween('GC', 'SA2'),

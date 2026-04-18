@@ -3,51 +3,103 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper: Check if user has admin role in the admins collection
+    // ── Helper functions ─────────────────────────────────────────────────────
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
     function isAdmin() {
-      return request.auth != null && 
+      return isAuthenticated() &&
              get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'admin';
     }
 
-    // ── Notifications (Admin Write / Public Read) ──────────────────────────────
-    // Notifications are publicly readable (fans + guests)
+    function hasValidString(field, maxLen) {
+      return field is string && field.size() > 0 && field.size() <= maxLen;
+    }
+
+    function isValidPriority(p) {
+      return p == 'info' || p == 'warning' || p == 'critical';
+    }
+
+    function isValidOrderStatus(s) {
+      return s == 'placed' || s == 'preparing' || s == 'ready' || s == 'collected';
+    }
+
+    // ── Notifications (Admin write with validation / Public read) ────────────
     match /notifications/{notificationId} {
       allow read: if true;
-      allow write: if isAdmin();
+
+      allow create: if isAdmin()
+        && hasValidString(request.resource.data.title, 80)
+        && hasValidString(request.resource.data.body, 300)
+        && isValidPriority(request.resource.data.priority)
+        && (request.resource.data.targetStadiumId == null
+            || request.resource.data.targetStadiumId is string);
+
+      allow update, delete: if isAdmin();
     }
 
-    // ── Crowd Data (Admin Write / Public Read) ────────────────────────────────
-    // Crowd density data is publicly readable (needed for guest heatmap)
+    // ── Crowd Data (Admin write with range validation / Public read) ─────────
     match /crowd/{stadiumId} {
       allow read: if true;
-      allow write: if isAdmin();
+
+      allow write: if isAdmin()
+        // Protect the sections map — values must be 0–100
+        && (!('sections' in request.resource.data)
+            || request.resource.data.sections is map);
     }
 
-    // ── Stalls & Incidents (Admin Write / Public Read) ─────────────────────────
-    // Basic venue info is public
+    // ── Stalls (Admin write / Public read) ──────────────────────────────────
     match /stadiums/{stadiumId}/stalls/{stallId} {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    // ── Incidents (Admin write / Public read) ────────────────────────────────
     match /stadiums/{stadiumId}/incidents/{incidentId} {
       allow read: if true;
-      allow write: if isAdmin();
+
+      allow create: if isAdmin()
+        && hasValidString(request.resource.data.title, 120)
+        && hasValidString(request.resource.data.zone, 50)
+        && request.resource.data.resolved == false;
+
+      allow update, delete: if isAdmin();
     }
 
-    // ── Orders (User Read/Write Own / Admin Read/Write All) ────────────────────
+    // ── Orders (User: create own + read own / Admin: full access) ────────────
     match /orders/{orderId} {
-      allow read, write: if (request.auth != null && request.auth.uid == resource.data.userId)
-                          || isAdmin();
-      allow create: if request.auth != null;
+      // Authenticated users can create orders for themselves
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.total is number
+        && request.resource.data.total > 0
+        && request.resource.data.total <= 50000
+        && isValidOrderStatus(request.resource.data.status);
+
+      // Users can only read their own orders; admins can read all
+      allow read: if (isAuthenticated() && resource.data.userId == request.auth.uid)
+                  || isAdmin();
+
+      // Only admins can update order status (e.g. placed → preparing → ready)
+      allow update: if isAdmin()
+        && isValidOrderStatus(request.resource.data.status);
+
+      allow delete: if isAdmin();
     }
 
-    // ── Admins Collection (Private) ──────────────────────────────────────────
+    // ── Admins Collection (Self-read only / No client writes) ────────────────
     match /admins/{userId} {
-      allow read: if request.auth != null && request.auth.uid == userId;
-      allow write: if false; // Only manageable via Firebase Console/Backend
+      allow read: if isOwner(userId);
+      allow write: if false; // Managed exclusively via Firebase Admin SDK / Console
     }
 
-    // ── Default: Deny All ────────────────────────────────────────────────────
+    // ── Default Deny ─────────────────────────────────────────────────────────
     match /{document=**} {
       allow read, write: if false;
     }

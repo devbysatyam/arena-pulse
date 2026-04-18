@@ -1,4 +1,32 @@
 steps:
+  # Step 1: Install dependencies reproducibly
+  - name: 'node:20-alpine'
+    entrypoint: 'npm'
+    args: ['ci', '--quiet']
+    id: 'install'
+
+  # Step 2: TypeScript strict type check (fails build on type errors)
+  - name: 'node:20-alpine'
+    entrypoint: 'npm'
+    args: ['run', 'type-check']
+    id: 'type-check'
+    waitFor: ['install']
+
+  # Step 3: ESLint with zero warnings tolerance
+  - name: 'node:20-alpine'
+    entrypoint: 'npm'
+    args: ['run', 'lint:strict']
+    id: 'lint'
+    waitFor: ['install']
+
+  # Step 4: Full test suite — build is blocked if any test fails
+  - name: 'node:20-alpine'
+    entrypoint: 'npm'
+    args: ['run', 'test:ci']
+    id: 'test'
+    waitFor: ['install']
+
+  # Step 5: Docker multi-stage build (only runs after type-check + lint + tests pass)
   - name: 'gcr.io/cloud-builders/docker'
     args:
       [
@@ -14,8 +42,41 @@ steps:
         '--build-arg', 'NEXT_PUBLIC_FIREBASE_APP_ID=${_FIREBASE_ID}',
         '--build-arg', 'NEXT_PUBLIC_MAPS_API_KEY=${_MAPS_KEY}',
         '--build-arg', 'NEXT_PUBLIC_GA_MEASUREMENT_ID=${_GA_ID}',
+        '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse:$COMMIT_SHA',
         '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse:latest',
         '.'
       ]
+    id: 'docker-build'
+    waitFor: ['type-check', 'lint', 'test']
+
+  # Step 6: Push both tags to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '--all-tags', 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse']
+    id: 'docker-push'
+    waitFor: ['docker-build']
+
+  # Step 7: Deploy to Cloud Run (zero-downtime rolling update)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'run', 'deploy', 'arena-pulse',
+        '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse:$COMMIT_SHA',
+        '--region', 'us-central1',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--min-instances', '0',
+        '--max-instances', '10',
+        '--memory', '512Mi',
+        '--cpu', '1',
+        '--concurrency', '80',
+      ]
+    waitFor: ['docker-push']
+
 images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse:$COMMIT_SHA'
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/arena-pulse-repo/arena-pulse:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_8'

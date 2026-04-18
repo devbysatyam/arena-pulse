@@ -52,9 +52,10 @@ export function useFirestoreSubscription<T>(
         setData(newData);
         setLoading(false);
       });
-    } catch (err: any) {
-      logger.error('useFirestoreSubscription error', { msg: err.message });
-      setError(err.message);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      logger.error('useFirestoreSubscription error', { msg });
+      setError(msg);
       setLoading(false);
     }
 
@@ -101,9 +102,10 @@ export function useFirestoreCollectionSubscription<T>(
         setItems(newItems);
         setLoading(false);
       });
-    } catch (err: any) {
-      logger.error('useFirestoreCollectionSubscription error', { msg: err.message });
-      setError(err.message);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      logger.error('useFirestoreCollectionSubscription error', { msg });
+      setError(msg);
       setLoading(false);
     }
 

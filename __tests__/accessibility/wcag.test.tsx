@@ -87,3 +87,51 @@ describe('Toast — Accessibility (no visible toast)', () => {
     expect(results).toHaveNoViolations();
   });
 });
+
+// ── ErrorBoundary Accessibility ───────────────────────────────────────────────
+
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+
+// Silence React's error boundary console.error during this test
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+});
+
+function ThrowingChild(): React.ReactElement {
+  throw new Error('wcag-test-error');
+}
+
+describe('ErrorBoundary fallback — Accessibility', () => {
+  it('fallback UI has no WCAG violations', async () => {
+    const { container } = render(
+      <ErrorBoundary>
+        <ThrowingChild />
+      </ErrorBoundary>
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+
+  it('fallback has role="alert" and aria-live="assertive"', () => {
+    const { getByRole } = render(
+      <ErrorBoundary>
+        <ThrowingChild />
+      </ErrorBoundary>
+    );
+    const alert = getByRole('alert');
+    expect(alert).toHaveAttribute('aria-live', 'assertive');
+  });
+
+  it('"Try Again" button has an accessible aria-label', () => {
+    const { getByRole } = render(
+      <ErrorBoundary>
+        <ThrowingChild />
+      </ErrorBoundary>
+    );
+    const button = getByRole('button', { name: /try.*again/i });
+    expect(button).toHaveAttribute('aria-label');
+  });
+});

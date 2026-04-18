@@ -410,8 +410,9 @@ export async function checkAdminRole(uid: string): Promise<boolean> {
   try {
     const snap = await getDoc(doc(db, 'admins', uid));
     return snap.exists() && snap.data()?.role === 'admin';
-  } catch (err: any) {
-    logger.error('Admin role check failed', { uid, msg: err.message });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    logger.error('Admin role check failed', { uid, msg: message });
     return false;
   }
 }

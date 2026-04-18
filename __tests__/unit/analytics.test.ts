@@ -168,3 +168,51 @@ describe('trackAdminBroadcast()', () => {
     expect(params.target).toBe('eden_gardens');
   });
 });
+
+// ── trackError() ──────────────────────────────────────────────────────────────
+
+describe('trackError()', () => {
+  it('calls gtag with "exception" event', () => {
+    const { trackError } = require('@/lib/analytics');
+    trackError('Gemini API unreachable');
+    expect(mockGtag).toHaveBeenCalledWith('event', 'exception', expect.any(Object));
+  });
+
+  it('sets fatal=false by default', () => {
+    const { trackError } = require('@/lib/analytics');
+    trackError('Minor error');
+    const params = mockGtag.mock.calls[0][2];
+    expect(params.fatal).toBe(false);
+  });
+
+  it('sets fatal=true when explicitly passed', () => {
+    const { trackError } = require('@/lib/analytics');
+    trackError('Critical failure', true);
+    const params = mockGtag.mock.calls[0][2];
+    expect(params.fatal).toBe(true);
+  });
+});
+
+// ── trackPerformance() ────────────────────────────────────────────────────────
+
+describe('trackPerformance()', () => {
+  it('calls gtag with "performance_metric" event', () => {
+    const { trackPerformance } = require('@/lib/analytics');
+    trackPerformance('ai_response_time', 312.7);
+    expect(mockGtag).toHaveBeenCalledWith('event', 'performance_metric', expect.any(Object));
+  });
+
+  it('rounds the value to the nearest integer', () => {
+    const { trackPerformance } = require('@/lib/analytics');
+    trackPerformance('lcp', 1234.9);
+    const params = mockGtag.mock.calls[0][2];
+    expect(params.value).toBe(1235);
+  });
+
+  it('includes the metric name', () => {
+    const { trackPerformance } = require('@/lib/analytics');
+    trackPerformance('fcp', 800);
+    const params = mockGtag.mock.calls[0][2];
+    expect(params.metric_name).toBe('fcp');
+  });
+});

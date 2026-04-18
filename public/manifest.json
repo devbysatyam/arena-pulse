@@ -1,16 +1,65 @@
 {
-  "name": "Arena Pulse",
-  "short_name": "Arena Pulse",
-  "description": "Smart Stadium Companion",
+  "name": "NexArena — Smart Stadium Companion",
+  "short_name": "NexArena",
+  "description": "AI-powered stadium assistant. Real-time crowd heatmaps, A* navigation, food ordering, and a Gemini-powered concierge.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#0a0b14",
   "theme_color": "#0a0b14",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["sports", "navigation", "utilities"],
   "icons": [
     {
       "src": "/favicon.ico",
-      "sizes": "256x256",
-      "type": "image/x-icon"
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "AI Concierge",
+      "short_name": "Ask AI",
+      "description": "Open the Arena AI chat assistant",
+      "url": "/?action=ai",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "Find My Seat",
+      "short_name": "My Seat",
+      "description": "Navigate to your seat",
+      "url": "/?action=map",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    },
+    {
+      "name": "Order Food",
+      "short_name": "Food",
+      "description": "Browse food stalls and order",
+      "url": "/?action=food",
+      "icons": [{ "src": "/favicon.ico", "sizes": "48x48" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 }

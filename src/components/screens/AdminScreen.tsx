@@ -86,8 +86,8 @@ export default function AdminScreen() {
       setNotifBody('');
       setNotifSent(true);
       setTimeout(() => setNotifSent(false), 2500);
-    } catch (err: any) {
-      setNotifError(err.message ?? 'Failed to send broadcast');
+    } catch (err: unknown) {
+      setNotifError(err instanceof Error ? err.message : 'Failed to send broadcast');
     } finally {
       setNotifSending(false);
     }

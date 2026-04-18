@@ -486,7 +486,7 @@ export default function Stadium3DScreen() {
               <div>
                 <h4 className="text-[9px] font-black text-[#00d4ff] uppercase tracking-[0.2em] mb-0.5">Recommended Route</h4>
                 <p className="text-sm font-bold text-white">
-                  {navRoute ? `→ ${navRoute.endNode}` : 'Navigate to your seat'}
+                  {navRoute ? `→ ${navRoute.path[navRoute.path.length - 1] ?? 'Destination'}` : 'Navigate to your seat'}
                 </p>
               </div>
             </div>
